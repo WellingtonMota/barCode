@@ -1,46 +1,14 @@
 import React, { Component } from 'react';
 import {
-  Container, 
-  Header, 
-  Title, 
-  Content, 
-  Footer, 
-  FooterTab, 
-  Button, 
-  Left, 
-  Right, 
-  Body, 
-  Icon, 
-  Text
+  Container
 } from 'native-base';
+import Camera from './components/Camera';
 
 export default class Main extends Component {
   render() {
     return (
       <Container>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon name='menu' />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Leitor</Title>
-          </Body>
-          <Right />
-        </Header>
-        <Content>
-          <Text>
-            This is Content Section
-          </Text>
-        </Content>
-        <Footer>
-          <FooterTab>
-            <Button full>
-              <Text>Wellington Mota</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
+        <Camera />
       </Container>
     );
   }
