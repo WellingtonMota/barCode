@@ -22,14 +22,16 @@ export default class Camera extends Component {
     };
   }
 
-  onBarCodeRead(scanResult) {
-    console.warn(`Result: ${scanResult}`);
-    console.warn(`Type scan: ${scanResult.type}`);
-    console.warn(`Data scan: ${scanResult.data}`);
-    if (scanResult.data != null) {
-      if (!this.barcodeCodes.includes(scanResult.data)) {
-        this.barcodeCodes.push(scanResult.data);
-        console.warn('onBarCodeRead call!!!');
+  onBarCodeRead(scan) {
+    if (scan.data != null) {
+      if (!this.barcodeCodes.includes(scan.data)) {
+        this.barcodeCodes.push(scan.data);
+
+        this.props.navigation.navigate('ResultsScreen', {
+          scanResult: scan,
+          scanResultType: scan.type,
+          scanResultData: scan.data
+        });
       }
     }
     return;
@@ -84,14 +86,6 @@ export default class Camera extends Component {
         <View style={[styles.overlay, styles.topOverlay]}>
           <Text style={styles.scanScreenMessage}>Por favor, aponte para o código de barras.</Text>
         </View>
-        <View style={[styles.overlay, styles.bottomOverlay]}>
-          <Button
-            // eslint-disable-next-line no-undef
-            onPress={() => { alert('scan clicked'); }}
-            style={styles.enterBarcodeManualButton}
-            title="Entre com o código de barras"
-          />
-        </View>
       </View>
     );
   }
@@ -115,7 +109,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   topOverlay: {
-    backgroundColor: '#aa2525',
+    backgroundColor: '#00b4e8',
     top: 0,
     flex: 1,
     flexDirection: 'row',
