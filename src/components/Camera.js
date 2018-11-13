@@ -3,6 +3,10 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
 export default class Camera extends Component {
+  static navigationOptions = {
+    title: 'CameraScreen',
+  };
+
   constructor(props) {
     super(props);
     this.camera = null;
@@ -98,6 +102,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   preview: {
+    backgroundColor: '#ededed',
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center'
@@ -110,6 +115,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   topOverlay: {
+    backgroundColor: '#aa2525',
     top: 0,
     flex: 1,
     flexDirection: 'row',
