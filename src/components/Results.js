@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
+import { Image } from 'react-native';
 import {
-  Body,
+  Container,
+  Header,
+  Content,
   Card,
   CardItem,
-  Container,
-  Content,
-  Text
+  H2,
+  Thumbnail,
+  Text,
+  Left,
+  Body
 } from 'native-base';
+
+const logoBarCode = require('../assets/images/logo.jpg');
+const qrCodeImage = require('../assets/images/qr.jpg');
 
 export default class Results extends Component {
   static navigationOptions = {
@@ -14,26 +22,41 @@ export default class Results extends Component {
   };
 
   render() {
-    const scanResult = this.props.navigation.getParam('scanResult', 'Falha na leitura');
     const scanResultType = this.props.navigation.getParam('scanResultType', 'Falha na leitura');
     const scanResultData = this.props.navigation.getParam('scanResultData', 'Falha na leitura');
 
+    let codeImage;
+    switch (JSON.stringify(scanResultType)) {
+      case 'QR_OCDE':
+        codeImage = qrCodeImage;
+        break;
+    
+      default:
+        codeImage = qrCodeImage;
+        break;
+    }
+
     return (
       <Container>
-        <Content padder>
-          <Card>
-            <CardItem header bordered>
-              <Text>Resultados</Text>
+        <Header />
+        <Content>
+          <Card style={{ flex: 0 }}>
+            <CardItem>
+              <Left>
+                <Thumbnail source={logoBarCode} />
+                <Body>
+                  <Text>Resultado</Text>
+                  <Text note>Tipo {JSON.stringify(scanResultType)}</Text>
+                </Body>
+              </Left>
             </CardItem>
-            <CardItem bordered>
+            <CardItem>
               <Body>
-                <Text>Saída: {JSON.stringify(scanResult)}</Text>
-                <Text>Tipo de código: {JSON.stringify(scanResultType)}</Text>
-                <Text>Tipo de dado: {JSON.stringify(scanResultData)}</Text>
+                <Image source={codeImage} style={{ height: 180, width: 180, flex: 1 }} />
+                <Text>
+                  <H2>Código: {JSON.stringify(scanResultData)}</H2>
+                </Text>
               </Body>
-            </CardItem>
-            <CardItem footer bordered>
-              <Text>[--##--]</Text>
             </CardItem>
           </Card>
         </Content>

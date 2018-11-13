@@ -28,7 +28,6 @@ export default class Camera extends Component {
         this.barcodeCodes.push(scan.data);
 
         this.props.navigation.navigate('ResultsScreen', {
-          scanResult: scan,
           scanResultType: scan.type,
           scanResultData: scan.data
         });
