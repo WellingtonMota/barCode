@@ -22,7 +22,11 @@ export default class Main extends Component {
           <Card style={{ alignItems: 'center' }}>
             <CardItem bordered>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('CameraScreen')}
+                onPress={() =>
+                  this.props.navigation.navigate('CameraScreen', {
+                    scanReadType: 'br'
+                  })
+                }
               >
                 <Image
                   source={barCode}
@@ -34,7 +38,11 @@ export default class Main extends Component {
           <Card style={{ alignItems: 'center' }}>
             <CardItem bordered>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('CameraScreen')}
+                onPress={() => 
+                  this.props.navigation.navigate('CameraScreen', {
+                    scanReadType: 'qr'
+                  })
+                }
               >
                 <Image
                   source={qrCode}

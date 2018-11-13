@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { BarcodeFinder } from './BarcodeFinder';
 
@@ -61,6 +61,8 @@ export default class Camera extends Component {
   }
 
   render() {
+    const scanReadType = this.props.navigation.getParam('scanReadType', 'Falha na leitura');
+
     return (
       <View style={styles.container}>
         <RNCamera
@@ -79,7 +81,25 @@ export default class Camera extends Component {
           permissionDialogMessage={'We need your permission to use your camera phone'}
           style={styles.preview}
           type={this.state.camera.type}
-          barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+          barCodeTypes={
+            [
+              scanReadType === 'qr' ? 
+                RNCamera.Constants.BarCodeType.qr ||
+                RNCamera.Constants.BarCodeType.datamatrix
+                :
+                RNCamera.Constants.BarCodeType.aztec || 
+                RNCamera.Constants.BarCodeType.code128 || 
+                RNCamera.Constants.BarCodeType.code39 || 
+                RNCamera.Constants.BarCodeType.code39mod43 ||
+                RNCamera.Constants.BarCodeType.code93 || 
+                RNCamera.Constants.BarCodeType.ean13 || 
+                RNCamera.Constants.BarCodeType.ean8 ||
+                RNCamera.Constants.BarCodeType.interleaved2of5 || 
+                RNCamera.Constants.BarCodeType.itf14 ||
+                RNCamera.Constants.BarCodeType.pdf417 || 
+                RNCamera.Constants.BarCodeType.upce
+            ]
+          }
         >
           <BarcodeFinder width={280} height={220} borderColor="red" borderWidth={2} />
         </RNCamera>
