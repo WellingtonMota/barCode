@@ -1,48 +1,49 @@
 import React, { Component } from 'react';
+import { Image, TouchableOpacity } from 'react-native';
 import {
-  Button,
-  Body,
+  Card,
+  CardItem,
   Container,
-  Footer,
-  FooterTab,
-  Header,
-  Icon,
-  Left,
-  Right,
-  Text,
-  Title
+  Content,
 } from 'native-base';
-import CardBarCode from './components/CardBarCode';
-import CardQrCode from './components/CardQrCode';
+
+const barCode = require('./assets/images/barCode.png');
+const qrCode = require('./assets/images/qrCode.png');
 
 export default class Main extends Component {
   static navigationOptions = {
-    title: 'MainScreen',
+    title: 'Super Scanner',
   };
 
   render() {
     return (
       <Container>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon name='menu' />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Super Scanner</Title>
-          </Body>
-          <Right />
-        </Header>
-        <CardBarCode />
-        <CardQrCode />
-        <Footer>
-          <FooterTab>
-            <Button full>
-              <Text>Wellington Mota</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
+        <Content>
+          <Card style={{ alignItems: 'center' }}>
+            <CardItem bordered>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('CameraScreen')}
+              >
+                <Image
+                  source={barCode}
+                  style={{ height: 200, width: 200, flex: 1 }}
+                />
+              </TouchableOpacity>
+            </CardItem>
+          </Card>
+          <Card style={{ alignItems: 'center' }}>
+            <CardItem bordered>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('CameraScreen')}
+              >
+                <Image
+                  source={qrCode}
+                  style={{ height: 200, width: 200, flex: 1 }}
+                />
+              </TouchableOpacity>
+            </CardItem>
+          </Card>
+        </Content>
       </Container>
     );
   }

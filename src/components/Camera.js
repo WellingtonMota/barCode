@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import { BarcodeFinder } from './BarcodeFinder';
 
 export default class Camera extends Component {
   static navigationOptions = {
-    title: 'CameraScreen',
+    title: 'Super Scanner',
   };
 
   constructor(props) {
@@ -61,14 +62,11 @@ export default class Camera extends Component {
     return (
       <View style={styles.container}>
         <RNCamera
-          ref={ref => {
-            this.camera = ref;
+          ref={cam => {
+            this.camera = cam;
           }}
-          barcodeFinderVisible={this.state.camera.barcodeFinderVisible}
-          barcodeFinderWidth={280}
-          barcodeFinderHeight={220}
-          barcodeFinderBorderColor="red"
-          barcodeFinderBorderWidth={5}
+          style={styles.preview}
+          onBarCodeRead={data => this.scannedBarcode(data)}
           defaultTouchToFocus
           flashMode={this.state.camera.flashMode}
           mirrorImage={false}
@@ -80,16 +78,18 @@ export default class Camera extends Component {
           style={styles.preview}
           type={this.state.camera.type}
           barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-        />
+        >
+          <BarcodeFinder width={280} height={220} borderColor="red" borderWidth={2} />
+        </RNCamera>
         <View style={[styles.overlay, styles.topOverlay]}>
-          <Text style={styles.scanScreenMessage}>Please scan the barcode.</Text>
+          <Text style={styles.scanScreenMessage}>Por favor, aponte para o código de barras.</Text>
         </View>
         <View style={[styles.overlay, styles.bottomOverlay]}>
           <Button
             // eslint-disable-next-line no-undef
             onPress={() => { alert('scan clicked'); }}
             style={styles.enterBarcodeManualButton}
-            title="Enter Barcode"
+            title="Entre com o código de barras"
           />
         </View>
       </View>

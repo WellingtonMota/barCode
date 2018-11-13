@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import Main from './src/Main';
+import Routers from './src/navigation/Routers';
 
 export default class App extends Component {
   componentDidMount() {
@@ -9,7 +9,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <Main />
+      <Routers />
     );
   }
 }
